@@ -20,3 +20,6 @@
 .w3-hover-theme:hover {color:#fff !important; background-color:#041549 !important}
 .w3-hover-text-theme:hover {color:#041549 !important}
 .w3-hover-border-theme:hover {border-color:#041549 !important}
+
+.w3-row.custom-flex  {display: flex; flex-wrap: wrap;}
+.w3-row.custom-flex.flex > .w3-col {flex: 1 0 290px;}

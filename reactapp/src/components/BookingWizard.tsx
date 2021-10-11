@@ -14,12 +14,12 @@ export class BookingWizard extends react.Component<any, any>{
         this.counsellorAppointmentData = new CounsellorAppointmentData();
         this.state = {
             slide: 0,
-            selectedDate: '',
-            selectedTime: '',
-            selectedType: '',
+            selectedDate: '2021-08-17',
+            selectedTime: '11:00',
+            selectedType: 'one_off',
             availableCounsellors: [],
-            availableTimes: [],
-            selectedCounsellor: {}
+            availableTimes: this.counsellorAppointmentData.getAvailableAppointmentTimes('one_off', '2021-08-17'),
+            selectedCounsellor: this.counsellorAppointmentData.getAvailableCounsellors('one_off', '2021-08-17', '11:00')
         }
         this.handleChangeDate = this.handleChangeDate.bind(this);
         this.handleChangeTime = this.handleChangeTime.bind(this);
