@@ -5,6 +5,7 @@ import { DisclaimerSection } from './DisclaimerSection';
 import { AppointmentTypeSelection } from './AppointmentTypeSelection';
 import { DateSelection } from './DateSelection';
 import { CounsellorSelection } from './CounsellorSelection';
+import { BookingConfirmation } from './BookingConfirmation';
 
 export class BookingWizard extends react.Component<any, any>{
     councellorAppointmentData: CouncellorAppointmentData;
@@ -17,12 +18,14 @@ export class BookingWizard extends react.Component<any, any>{
             selectedTime: '11:00',
             selectedType: 'one_off',
             availableCouncellors: this.councellorAppointmentData.getAvailableCouncellors('one_off', '2021-08-17', '11:00'),
-            availableTimes: this.councellorAppointmentData.getAvailableAppointmentTimes('one_off', '2021-08-17')
+            availableTimes: this.councellorAppointmentData.getAvailableAppointmentTimes('one_off', '2021-08-17'),
+            selectedCounsellor: {}
         }
         this.handleChangeDate = this.handleChangeDate.bind(this);
         this.handleChangeTime = this.handleChangeTime.bind(this);
         this.handleTypeSelection = this.handleTypeSelection.bind(this);
         this.changeSlide = this.changeSlide.bind(this);
+        this.handleSelectCounsellor = this.handleSelectCounsellor.bind(this);
     }
     changeSlide(slide: number) {
         this.setState({
@@ -46,25 +49,38 @@ export class BookingWizard extends react.Component<any, any>{
             selectedType: type
         })
     }
+    handleSelectCounsellor(counsellor: Councellor) {
+        this.setState({
+            selectedCounsellor: counsellor
+        })
+    }
     render() {
-
-
-
         return (
-            <form className="w3-container">
-                <DisclaimerSection display={this.state.slide === 0} changeSlide={this.changeSlide} />
-                <AppointmentTypeSelection display={this.state.slide === 1} handleTypeSelection={this.handleTypeSelection} changeSlide={this.changeSlide} />
-                <DateSelection display={this.state.slide === 2} handleChangeDate={this.handleChangeDate} changeSlide={this.changeSlide} />
-                <CounsellorSelection
-                    display={this.state.slide === 3}
-                    availableCouncellors={this.state.availableCouncellors}
-                    changeSlide={this.changeSlide} availableTimes={this.state.availableTimes}
-                    handleChangeTime={this.handleChangeTime}
+            <div>
+                <form className="w3-container">
+                    <DisclaimerSection display={this.state.slide === 0} changeSlide={this.changeSlide} />
+                    <AppointmentTypeSelection display={this.state.slide === 1} handleTypeSelection={this.handleTypeSelection} changeSlide={this.changeSlide} />
+                    <DateSelection display={this.state.slide === 2} handleChangeDate={this.handleChangeDate} changeSlide={this.changeSlide} />
+                    <CounsellorSelection
+                        display={this.state.slide === 3}
+                        availableCouncellors={this.state.availableCouncellors}
+                        changeSlide={this.changeSlide} availableTimes={this.state.availableTimes}
+                        handleChangeTime={this.handleChangeTime}
+                        handleSelectCounsellor={this.handleSelectCounsellor}
+                    />
+                </form>
+                <BookingConfirmation
+                    display={this.state.slide === 4}
+                    type={this.state.selectedType}
+                    date={this.state.selectedDate}
+                    time={this.state.selectedTime}
+                    counsellor={this.state.selectedCounsellor}
                 />
-            </form>
+            </div>
         )
     }
 }
+
 
 
 
