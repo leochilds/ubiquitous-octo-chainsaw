@@ -4,14 +4,13 @@ import { Councellor } from '../data/councellor-data';
 import { DisclaimerSection } from './DisclaimerSection';
 import { AppointmentTypeSelection } from './AppointmentTypeSelection';
 import { DateSelection } from './DateSelection';
+import { CounsellorSelection } from './CounsellorSelection';
 
 export class BookingWizard extends react.Component<any, any>{
     councellorAppointmentData: CouncellorAppointmentData;
-    availableTypes: string[];
     constructor(props: { [key: string]: any }) {
         super(props);
         this.councellorAppointmentData = new CouncellorAppointmentData();
-        this.availableTypes = CouncellorAppointmentData.getAppointmentTypes();
         this.state = {
             slide: 0,
             selectedDate: '2021-08-17',
@@ -48,30 +47,24 @@ export class BookingWizard extends react.Component<any, any>{
         })
     }
     render() {
-        const renderAvailableCouncellors = this.state.availableCouncellors.map((c: Councellor) => {
-            return <li>{c.firstName} {c.lastName}</li>
-        });
-        const renderAvailableTimes = this.state.availableTimes.map((time: string) => {
-            return <a className='w3-btn' onClick={() => this.handleChangeTime(time)}>{time}</a>
-        });
-        const renderTypes = this.availableTypes.map((type: string) => {
-            return <a className='w3-btn' onClick={() => this.handleTypeSelection(type)}>{type.replace(/_/i, '-')}</a>
-        })
+
+
+
         return (
             <form className="w3-container">
                 <DisclaimerSection display={this.state.slide === 0} changeSlide={this.changeSlide} />
                 <AppointmentTypeSelection display={this.state.slide === 1} handleTypeSelection={this.handleTypeSelection} changeSlide={this.changeSlide} />
                 <DateSelection display={this.state.slide === 2} handleChangeDate={this.handleChangeDate} changeSlide={this.changeSlide} />
-                <section>
-                    <h1>Select Appointment Time</h1>
-                    {renderAvailableTimes}
-                </section>
-                <section>
-                    <h1>Select Counsellor</h1>
-                    <ul>{renderAvailableCouncellors}</ul>
-                </section>
+                <CounsellorSelection
+                    display={this.state.slide === 3}
+                    availableCouncellors={this.state.availableCouncellors}
+                    changeSlide={this.changeSlide} availableTimes={this.state.availableTimes}
+                    handleChangeTime={this.handleChangeTime}
+                />
             </form>
         )
     }
 }
+
+
 
