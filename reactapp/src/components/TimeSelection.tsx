@@ -1,7 +1,16 @@
 import react from "react";
 
-export class TimeSelection extends react.Component<any, any> {
-    constructor(props: { [key: string]: any }) {
+interface TimeSelectionProps {
+    handleChangeTime: (time: string) => void,
+    availableTimes: string[]
+}
+
+interface TimeSelectionState {
+    availableTimes: string[]
+}
+
+export class TimeSelection extends react.Component<TimeSelectionProps, TimeSelectionState> {
+    constructor(props: TimeSelectionProps) {
         super(props)
         this.state = {
             availableTimes: props.availableTimes

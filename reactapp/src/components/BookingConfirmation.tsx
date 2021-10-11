@@ -1,7 +1,16 @@
 import react from "react"
+import { Counsellor } from "../data/counsellor-data"
+import { SlideProps } from "./SlideProps"
 
-export class BookingConfirmation extends react.Component<any, any> {
-    constructor(props: { [key: string]: any }) {
+interface BookingProps extends SlideProps {
+    type: string,
+    date: string,
+    time: string,
+    counsellor: Counsellor
+}
+
+export class BookingConfirmation extends react.Component<BookingProps> {
+    constructor(props: BookingProps) {
         super(props)
     }
     render() {

@@ -1,6 +1,6 @@
 import react from 'react';
-import { CouncellorAppointmentData } from '../data/councellors';
-import { Councellor } from '../data/councellor-data';
+import { CounsellorAppointmentData } from '../data/counsellors';
+import { Counsellor } from '../data/counsellor-data';
 import { DisclaimerSection } from './DisclaimerSection';
 import { AppointmentTypeSelection } from './AppointmentTypeSelection';
 import { DateSelection } from './DateSelection';
@@ -8,17 +8,17 @@ import { CounsellorSelection } from './CounsellorSelection';
 import { BookingConfirmation } from './BookingConfirmation';
 
 export class BookingWizard extends react.Component<any, any>{
-    councellorAppointmentData: CouncellorAppointmentData;
+    counsellorAppointmentData: CounsellorAppointmentData;
     constructor(props: { [key: string]: any }) {
         super(props);
-        this.councellorAppointmentData = new CouncellorAppointmentData();
+        this.counsellorAppointmentData = new CounsellorAppointmentData();
         this.state = {
             slide: 0,
-            selectedDate: '2021-08-17',
-            selectedTime: '11:00',
-            selectedType: 'one_off',
-            availableCouncellors: this.councellorAppointmentData.getAvailableCouncellors('one_off', '2021-08-17', '11:00'),
-            availableTimes: this.councellorAppointmentData.getAvailableAppointmentTimes('one_off', '2021-08-17'),
+            selectedDate: '',
+            selectedTime: '',
+            selectedType: '',
+            availableCounsellors: [],
+            availableTimes: [],
             selectedCounsellor: {}
         }
         this.handleChangeDate = this.handleChangeDate.bind(this);
@@ -35,13 +35,13 @@ export class BookingWizard extends react.Component<any, any>{
     handleChangeDate(date: string) {
         this.setState({
             selectedDate: date,
-            availableTimes: this.councellorAppointmentData.getAvailableAppointmentTimes(this.state.selectedType, date)
+            availableTimes: this.counsellorAppointmentData.getAvailableAppointmentTimes(this.state.selectedType, date)
         });
     }
     handleChangeTime(time: string) {
         this.setState({
             selectedTime: time,
-            availableCouncellors: this.councellorAppointmentData.getAvailableCouncellors(this.state.selectedType, this.state.selectedDate, time),
+            availableCounsellors: this.counsellorAppointmentData.getAvailableCounsellors(this.state.selectedType, this.state.selectedDate, time),
         })
     }
     handleTypeSelection(type: string) {
@@ -49,7 +49,7 @@ export class BookingWizard extends react.Component<any, any>{
             selectedType: type
         })
     }
-    handleSelectCounsellor(counsellor: Councellor) {
+    handleSelectCounsellor(counsellor: Counsellor) {
         this.setState({
             selectedCounsellor: counsellor
         })
@@ -63,7 +63,7 @@ export class BookingWizard extends react.Component<any, any>{
                     <DateSelection display={this.state.slide === 2} handleChangeDate={this.handleChangeDate} changeSlide={this.changeSlide} />
                     <CounsellorSelection
                         display={this.state.slide === 3}
-                        availableCouncellors={this.state.availableCouncellors}
+                        availableCounsellors={this.state.availableCounsellors}
                         changeSlide={this.changeSlide} availableTimes={this.state.availableTimes}
                         handleChangeTime={this.handleChangeTime}
                         handleSelectCounsellor={this.handleSelectCounsellor}
@@ -75,6 +75,7 @@ export class BookingWizard extends react.Component<any, any>{
                     date={this.state.selectedDate}
                     time={this.state.selectedTime}
                     counsellor={this.state.selectedCounsellor}
+                    changeSlide={this.changeSlide}
                 />
             </div>
         )

@@ -1,4 +1,4 @@
-export type Councellor = {
+export type Counsellor = {
     id: string,
     firstName: string,
     lastName: string,
@@ -8,7 +8,7 @@ export type Councellor = {
     availability?: { id: string, datetime: string }[]
 }
 
-export const councellors: Councellor[] = [
+export const counsellors: Counsellor[] = [
     {
         "id": "79590113-a6a3-45c3-9d5e-28472a8c4a74",
         "firstName": "Lettie",

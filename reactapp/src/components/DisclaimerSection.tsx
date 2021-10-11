@@ -1,7 +1,12 @@
 import react from 'react';
+import { SlideProps } from './SlideProps';
 
-export class DisclaimerSection extends react.Component<any, any> {
-    constructor(props: { [key: string]: any }) {
+interface DisclaimerState {
+    checked: boolean
+}
+
+export class DisclaimerSection extends react.Component<SlideProps, DisclaimerState> {
+    constructor(props: SlideProps) {
         super(props);
         this.state = {
             checked: false

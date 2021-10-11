@@ -1,7 +1,16 @@
 import react from "react";
+import { SlideProps } from "./SlideProps";
 
-export class DateSelection extends react.Component<any, any> {
-    constructor(props: { [key: string]: any }) {
+interface DateSelectionProps extends SlideProps {
+    handleChangeDate: (date: string) => void
+}
+
+interface DateSelectionState {
+    selectedDate: string
+}
+
+export class DateSelection extends react.Component<DateSelectionProps, DateSelectionState> {
+    constructor(props: DateSelectionProps) {
         super(props);
         this.state = {
             selectedDate: ''

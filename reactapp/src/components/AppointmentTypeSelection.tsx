@@ -1,11 +1,16 @@
 import react from "react";
-import { CouncellorAppointmentData } from "../data/councellors";
+import { CounsellorAppointmentData } from "../data/counsellors";
+import { SlideProps } from "./SlideProps";
 
-export class AppointmentTypeSelection extends react.Component<any, any> {
+interface TypeSelectionProps extends SlideProps {
+    handleTypeSelection: (type: string) => void
+}
+
+export class AppointmentTypeSelection extends react.Component<TypeSelectionProps> {
     availableTypes: string[];
-    constructor(props: { [key: string]: any }) {
+    constructor(props: TypeSelectionProps) {
         super(props)
-        this.availableTypes = CouncellorAppointmentData.getAppointmentTypes();
+        this.availableTypes = CounsellorAppointmentData.getAppointmentTypes();
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
     handleButtonClick(type: string) {
