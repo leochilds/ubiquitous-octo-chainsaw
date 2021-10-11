@@ -3,6 +3,7 @@ import { CouncellorAppointmentData } from '../data/councellors';
 import { Councellor } from '../data/councellor-data';
 import { DisclaimerSection } from './DisclaimerSection';
 import { AppointmentTypeSelection } from './AppointmentTypeSelection';
+import { DateSelection } from './DateSelection';
 
 export class BookingWizard extends react.Component<any, any>{
     councellorAppointmentData: CouncellorAppointmentData;
@@ -29,10 +30,10 @@ export class BookingWizard extends react.Component<any, any>{
             slide: slide
         })
     }
-    handleChangeDate(event: { target: { value: any; }; }) {
+    handleChangeDate(date: string) {
         this.setState({
-            selectedDate: event.target.value,
-            availableTimes: this.councellorAppointmentData.getAvailableAppointmentTimes(this.state.selectedType, event.target.value)
+            selectedDate: date,
+            availableTimes: this.councellorAppointmentData.getAvailableAppointmentTimes(this.state.selectedType, date)
         });
     }
     handleChangeTime(time: string) {
@@ -60,10 +61,7 @@ export class BookingWizard extends react.Component<any, any>{
             <form className="w3-container">
                 <DisclaimerSection display={this.state.slide === 0} changeSlide={this.changeSlide} />
                 <AppointmentTypeSelection display={this.state.slide === 1} handleTypeSelection={this.handleTypeSelection} changeSlide={this.changeSlide} />
-                <section>
-                    <h1>Select date</h1>
-                    <input onChange={this.handleChangeDate} type='date' />
-                </section>
+                <DateSelection display={this.state.slide === 2} handleChangeDate={this.handleChangeDate} changeSlide={this.changeSlide} />
                 <section>
                     <h1>Select Appointment Time</h1>
                     {renderAvailableTimes}
@@ -77,6 +75,3 @@ export class BookingWizard extends react.Component<any, any>{
     }
 }
 
-class DateSelection extends react.Component {
-
-}
