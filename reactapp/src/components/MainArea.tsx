@@ -9,39 +9,34 @@ interface MainAreaProps {
 }
 interface MainAreaState {
     page: number,
-    selectedCounsellor: Counsellor
+    selectedCounsellor: Counsellor,
+    selectedDate: string
 }
 export class MainArea extends react.Component<MainAreaProps, MainAreaState> {
     constructor(props: MainAreaProps) {
         super(props);
         this.state = {
             page: 1,
-            selectedCounsellor: this.props.counsellorAppointmentData.counsellorAvailability[0]
+            selectedCounsellor: this.props.counsellorAppointmentData.counsellorAvailability[0],
+            selectedDate: '2021-08-17'
         }
-        this.handleSelectCounsellor = this.handleSelectCounsellor.bind(this);
         this.goToBookingPage = this.goToBookingPage.bind(this);
 
     }
-    handleSelectCounsellor(counsellor: Counsellor) {
+    goToBookingPage(counsellor: Counsellor, date: string) {
         this.setState({
-            selectedCounsellor: counsellor
-        }, () => {
-            this.goToBookingPage();
+            selectedCounsellor: counsellor,
+            page: 2,
+            selectedDate: date
         })
-
-    }
-    goToBookingPage() {
-        this.setState({
-            page: 2
-        });
     }
     render() {
         return (
             <div className="content">
 
                 {this.state.page === 0 && <PatientDashboard />}
-                {this.state.page === 1 && <CounsellorSearch counsellorAppointmentData={this.props.counsellorAppointmentData} goToBookingPage={this.handleSelectCounsellor} />}
-                {this.state.page === 2 && <Booking counsellor={this.state.selectedCounsellor} selectedDate="2021-08-17" />}
+                {this.state.page === 1 && <CounsellorSearch counsellorAppointmentData={this.props.counsellorAppointmentData} goToBookingPage={this.goToBookingPage} />}
+                {this.state.page === 2 && <Booking counsellor={this.state.selectedCounsellor} selectedDate={this.state.selectedDate} />}
 
             </div>
         )

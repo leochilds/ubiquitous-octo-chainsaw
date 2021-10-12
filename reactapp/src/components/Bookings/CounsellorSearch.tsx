@@ -5,7 +5,7 @@ import { CounsellorResults } from "./CounsellorResults";
 import { SearchFilter, SearchFilterState } from "./SearchFilter";
 interface CounsellorSearchProps {
     counsellorAppointmentData: CounsellorAppointmentData,
-    goToBookingPage: (counsellor: Counsellor) => void
+    goToBookingPage: (counsellor: Counsellor, date: string) => void
 }
 interface CounsellorSearchState {
     selectedDate: string,
@@ -18,13 +18,14 @@ export class CounsellorSearch extends react.Component<CounsellorSearchProps, Cou
     constructor(props: CounsellorSearchProps) {
         super(props)
         this.state = {
-            selectedDate: '',
+            selectedDate: '2021-08-17',
             appointmentTypes: [],
             appointmentMediums: [],
             counsellorSpecialisms: [],
             availableCounsellors: props.counsellorAppointmentData.counsellorAvailability
         }
         this.filterResults = this.filterResults.bind(this);
+        this.goToBookingPage = this.goToBookingPage.bind(this);
     }
     filterResults(filters: SearchFilterState) {
         const types: string[] = [];
@@ -52,14 +53,18 @@ export class CounsellorSearch extends react.Component<CounsellorSearchProps, Cou
             counsellorSpecialisms: specialisms.length ? specialisms : Object.keys(CounsellorAppointmentData.getSpecialisms())
         };
         state['availableCounsellors'] = this.props.counsellorAppointmentData.getAvailableCounsellors(state.selectedDate, state.appointmentTypes, state.appointmentMediums, state.counsellorSpecialisms)
-        this.setState(state)
+        this.setState(state);
+
+    }
+    goToBookingPage(counsellor: Counsellor) {
+        this.props.goToBookingPage(counsellor, this.state.selectedDate)
     }
     render() {
         return (
             <div className='container-fluid'>
                 <div className="row">
                     <SearchFilter filterResults={this.filterResults} />
-                    <CounsellorResults goToBookingPage={this.props.goToBookingPage} counsellorList={this.state.availableCounsellors} />
+                    <CounsellorResults goToBookingPage={this.goToBookingPage} counsellorList={this.state.availableCounsellors} />
                 </div>
             </div>
         )
