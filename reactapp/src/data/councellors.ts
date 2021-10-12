@@ -1,15 +1,23 @@
 import { Counsellor, counsellors } from "./counsellor-data";
 import { availability } from "./availability-data";
 
+type Appointment = {
+    counsellor: Counsellor,
+    datetime: string,
+    type: string,
+    medium: string
+}
 
 export class CounsellorAppointmentData {
     counsellorAvailability: Counsellor[];
+    appointments: Appointment[];
     constructor() {
         this.counsellorAvailability = counsellors.map((councellor) => {
             const c = { ...councellor };
             c.availability = availability[c.id] || [];
             return c;
         });
+        this.appointments = []
     }
     static getAppointmentTypes(): { [key: string]: boolean } {
         const typeStrings = [...new Set(counsellors.map(c => c.appointment_types).flat())];
@@ -47,14 +55,24 @@ export class CounsellorAppointmentData {
             })
         return availableCounsellors;
     }
-    static getCounsellorAvailability(counsellor: Counsellor, date: string) {
-        const availableTimes = counsellor.availability!.filter(a => a.datetime.includes(date)).map(a => a.datetime);
+    static getCounsellorAvailability(counsellor: Counsellor, date: string): { datetime: string, id: string }[] {
+        const availableTimes = counsellor.availability!.filter(a => a.datetime.includes(date));
         return availableTimes || [];
     }
-    getCounsellorAvailabilityById(id: string, date: string): string[] {
-        const counsellor = this.counsellorAvailability.find(c => c.id = id);
-        const availableTimes = counsellor!.availability!.filter(a => a.datetime.includes(date)).map(a => a.datetime);
-        return availableTimes || [];
+    bookAppointment(counsellorId: string, appointmentId: string, type: string, medium: string) {
+        const counsellorIndex = this.counsellorAvailability.findIndex(c => c.id === counsellorId);
+        const counsellor = { ...this.counsellorAvailability[counsellorIndex] };
+        const appointmentIndex = counsellor.availability!.findIndex((a: { id: string, datetime: string }) => a.id === appointmentId);
+        const { availability, ...selectedCounsellor } = counsellor;
+        const appointment: Appointment = {
+            counsellor: selectedCounsellor,
+            datetime: availability!.find(d => d.id === appointmentId)!.datetime,
+            type: type,
+            medium: medium
+        }
+        this.counsellorAvailability[counsellorIndex].availability?.splice(appointmentIndex, 1);
+        this.appointments.push(appointment);
+        return appointment;
     }
 }
 

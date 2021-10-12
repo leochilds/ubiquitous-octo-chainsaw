@@ -7,13 +7,13 @@ import { Counsellor, counsellors } from "../../data/counsellor-data";
 interface TimePickerProps {
     counsellor: Counsellor,
     selectedDate: string,
-    selectAppointment: (day: string, time: string) => void
+    selectAppointment: (day: string, time: { datetime: string, id: string }) => void
 }
 interface TimePickerState {
     week: any,
     trackingDate: string,
     selectedDate: string,
-    selectedTime: string
+    selectedTime: { datetime: string, id: string }
 }
 
 export class TimePicker extends react.Component<TimePickerProps, TimePickerState> {
@@ -23,7 +23,10 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
             trackingDate: this.props.selectedDate,
             week: getAvailability(this.props.counsellor, this.props.selectedDate),
             selectedDate: '',
-            selectedTime: ''
+            selectedTime: {
+                datetime: '',
+                id: ''
+            }
         }
         this.nextWeek = this.nextWeek.bind(this);
         this.lastWeek = this.lastWeek.bind(this);
@@ -44,7 +47,7 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
         })
 
     }
-    picktime(date: string, time: string) {
+    picktime(date: string, time: { datetime: string, id: string }) {
         this.setState({
             selectedDate: date,
             selectedTime: time
@@ -52,7 +55,7 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
         this.props.selectAppointment(date, time);
     }
     render() {
-        const renderDayRow = this.state.week.map((day: { date: string, times: string[] }) => {
+        const renderDayRow = this.state.week.map((day: { date: string, times: { datetime: string, id: string }[] }) => {
             return (
                 <li key={day.date}>
                     <span>{moment(day.date).format('dddd').substring(0, 3)}</span>
@@ -60,9 +63,9 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
                 </li>
             )
         });
-        const renderDayColumns = this.state.week.map((day: { date: string, times: string[] }) => {
-            const times = day.times.map(t => <a key={t} onClick={() => this.picktime(day.date, t)} className={this.state.selectedTime === t && this.state.selectedDate === day.date ? 'selected timing' : 'timing'} href="#">
-                <span>{t}</span>
+        const renderDayColumns = this.state.week.map((day: { date: string, times: { datetime: string, id: string }[] }) => {
+            const times = day.times.map(t => <a key={t.id} onClick={() => this.picktime(day.date, t)} className={this.state.selectedTime.id === t.id && this.state.selectedDate === day.date ? 'selected timing' : 'timing'} href="#">
+                <span>{t.datetime.substring(11, 16)}</span>
             </a>)
             return (
                 <li key={day.date}>
@@ -113,14 +116,14 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
     }
 }
 
-const getAvailability = (counsellor: Counsellor, selectedDate: string): { date: string, times: string[] }[] => {
+const getAvailability = (counsellor: Counsellor, selectedDate: string): { date: string, times: { datetime: string, id: string }[] }[] => {
     const today = moment(selectedDate);
     const start = today.startOf('week');
     const week = Array.from(Array(7).keys()).map(i => start.add(1, 'days').format('YYYY-MM-DD'));
     const availability = week.map(date => {
         return {
             date: date,
-            times: CounsellorAppointmentData.getCounsellorAvailability(counsellor, date).map(dt => dt.substring(11, 16)).sort()
+            times: CounsellorAppointmentData.getCounsellorAvailability(counsellor, date).sort()
         }
     });
     return availability;

@@ -2,6 +2,7 @@ import react from "react";
 import { CounsellorAppointmentData } from "../data/councellors";
 import { Counsellor, counsellors } from "../data/counsellor-data";
 import { Booking } from "./Bookings/Bookings";
+import { Confirmed } from "./Bookings/Confirmed";
 import { CounsellorSearch } from "./Bookings/CounsellorSearch";
 import { PatientDashboard } from "./PatientDashboard";
 interface MainAreaProps {
@@ -16,7 +17,7 @@ export class MainArea extends react.Component<MainAreaProps, MainAreaState> {
     constructor(props: MainAreaProps) {
         super(props);
         this.state = {
-            page: 1,
+            page: 3,
             selectedCounsellor: this.props.counsellorAppointmentData.counsellorAvailability[0],
             selectedDate: '2021-08-17'
         }
@@ -37,7 +38,7 @@ export class MainArea extends react.Component<MainAreaProps, MainAreaState> {
                 {this.state.page === 0 && <PatientDashboard />}
                 {this.state.page === 1 && <CounsellorSearch counsellorAppointmentData={this.props.counsellorAppointmentData} goToBookingPage={this.goToBookingPage} />}
                 {this.state.page === 2 && <Booking counsellor={this.state.selectedCounsellor} selectedDate={this.state.selectedDate} />}
-
+                {this.state.page === 3 && <Confirmed />}
             </div>
         )
     }

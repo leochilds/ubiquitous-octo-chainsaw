@@ -9,7 +9,7 @@ interface BookingProps {
 }
 interface BookingState {
     selectedDate: string,
-    selectedTime: string,
+    selectedTime: { datetime: string, id: string },
     selectedType: string,
     selectedMedium: string
 }
@@ -18,7 +18,7 @@ export class Booking extends react.Component<BookingProps, BookingState> {
         super(props)
         this.state = {
             selectedDate: this.props.selectedDate,
-            selectedTime: '',
+            selectedTime: { datetime: '', id: '' },
             selectedType: '',
             selectedMedium: ''
         }
@@ -26,7 +26,7 @@ export class Booking extends react.Component<BookingProps, BookingState> {
         this.handleSelectMedium = this.handleSelectMedium.bind(this);
         this.handleSelectType = this.handleSelectType.bind(this);
     }
-    selectAppointment(day: string, time: string) {
+    selectAppointment(day: string, time: { datetime: string, id: string }) {
         this.setState({
             selectedDate: day,
             selectedTime: time
@@ -77,7 +77,7 @@ export class Booking extends react.Component<BookingProps, BookingState> {
                         </div>
                         <div className="row">
                             <div className="col-12 col-sm-4 col-md-6">
-                                <h4 className="mb-1">{moment(this.state.selectedDate).format('Do MMMM YYYY')} {this.state.selectedTime}</h4>
+                                <h4 className="mb-1">{moment(this.state.selectedDate).format('Do MMMM YYYY')} {this.state.selectedTime.datetime.substring(11, 16)}</h4>
                                 <p className="text-muted">{moment(this.state.selectedDate).format('dddd')}</p>
                             </div>
                         </div>
