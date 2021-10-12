@@ -86,7 +86,7 @@ export class Booking extends react.Component<BookingProps, BookingState> {
                         </div>
                         <div className="row">
                             <div className="col-12 col-sm-4 col-md-6">
-                                <h4 className="mb-1">{moment(this.state.selectedDate).format('Do MMMM YYYY')} {this.state.selectedTime.datetime.substring(11, 16)}</h4>
+                                <h4 className="mb-1">{moment(this.state.selectedDate).format('Do MMMM YYYY')} {this.state.selectedTime.datetime === '' ? '' : moment(this.state.selectedTime.datetime).format('hh:mm a')}</h4>
                                 <p className="text-muted">{moment(this.state.selectedDate).format('dddd')}</p>
                             </div>
                         </div>
