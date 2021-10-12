@@ -6,7 +6,7 @@ import { CounsellorAppointmentData } from './data/councellors';
 function App() {
   const counsellorAppointmentData = new CounsellorAppointmentData()
   return (
-    <div className="App main-wrapper">
+    <div className="App">
       <MainArea counsellorAppointmentData={counsellorAppointmentData} />
     </div>
   );

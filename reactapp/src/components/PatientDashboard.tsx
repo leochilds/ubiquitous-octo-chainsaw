@@ -39,18 +39,14 @@ export class PatientDashboard extends react.Component<PatientDashboardProps> {
                                 <nav className="user-tabs mb-4">
                                     <ul className="nav nav-tabs nav-tabs-bottom nav-justified">
                                         <li className="nav-item">
-                                            <a className="nav-link active" href="#pat_appointments" data-toggle="tab">Appointments</a>
+                                            <a className="nav-link active" href="#pat_appointments_one_off" data-toggle="tab">One Off</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="#pat_appointments_consultation" data-toggle="tab">Consultations</a>
                                         </li>
                                     </ul>
                                 </nav>
-
-                                <div className="tab-content pt-0">
-
-                                    <Apppointments counsellorAppointmentData={this.props.counsellorAppointmentData} />
-
-
-                                </div>
-
+                                <Apppointments counsellorAppointmentData={this.props.counsellorAppointmentData} />
                             </div>
                         </div>
                     </div>
