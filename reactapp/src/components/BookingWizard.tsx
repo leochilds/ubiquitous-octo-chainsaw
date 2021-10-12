@@ -21,6 +21,7 @@ export class BookingWizard extends react.Component<any, any>{
             availableTimes: this.counsellorAppointmentData.getAvailableAppointmentTimes('one_off', '2021-08-17'),
             selectedCounsellor: this.counsellorAppointmentData.getAvailableCounsellors('one_off', '2021-08-17', '11:00')
         }
+        this.renderSlide = this.renderSlide.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
         this.handleChangeTime = this.handleChangeTime.bind(this);
         this.handleTypeSelection = this.handleTypeSelection.bind(this);
@@ -65,6 +66,14 @@ export class BookingWizard extends react.Component<any, any>{
             handleChangeTime={this.handleChangeTime}
             handleSelectCounsellor={this.handleSelectCounsellor}
         />]
+        if (slideNumber < 0) {
+            this.changeSlide(0);
+            return slides[0];
+        }
+        if (slideNumber >= slides.length) {
+            this.changeSlide(slides.length - 1);
+            return slides[slides.length - 1];
+        }
         return slides[slideNumber];
     }
     render() {
@@ -72,6 +81,8 @@ export class BookingWizard extends react.Component<any, any>{
             <div>
                 <form className="w3-container">
                     {this.renderSlide(this.state.slide)}
+                    <br />
+                    <a className='w3-btn w3-red w3-left w3-padding-large' onClick={() => this.changeSlide(this.state.slide - 1)}>Go Back</a>
                 </form>
                 <BookingConfirmation
                     display={this.state.slide === 4}

@@ -21,13 +21,23 @@ export class TimeSelection extends react.Component<TimeSelectionProps, TimeSelec
         this.props.handleChangeTime(time);
     }
     render() {
-        const renderAvailableTimes = this.state.availableTimes.map((time: string) => {
-            return <a className='w3-btn w3-round-xxlarge w3-theme' onClick={() => this.handleChangeTime(time)}>{time}</a>
-        });
+        const renderAvailableTimes = () => {
+            if (this.state.availableTimes.length === 0) {
+                return (
+                    <div className="w3-panel w3-pale-red w3-border">
+                        <p>Sorry, there are no available appointments on your selected date</p>
+                    </div>
+                )
+            }
+            return this.state.availableTimes.map((time: string) => {
+                return <a className='w3-btn w3-round-xxlarge w3-theme' onClick={() => this.handleChangeTime(time)}>{time}</a>
+            });
+        }
+
         return (
             <section>
                 <h1>Select Appointment Time</h1>
-                {renderAvailableTimes}
+                {renderAvailableTimes()}
             </section>
         )
     }
