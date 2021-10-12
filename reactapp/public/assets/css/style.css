@@ -8210,3 +8210,16 @@ span.call-duration.float-right {
     padding: 6px 10px;
     background: #f7f7f7;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
