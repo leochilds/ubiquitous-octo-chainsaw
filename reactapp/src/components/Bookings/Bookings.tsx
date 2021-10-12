@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import react from "react";
 import { Counsellor } from "../../data/counsellor-data";
 import logo from "../../assets/logo.png"
@@ -62,7 +63,7 @@ export class Booking extends react.Component<BookingProps, BookingState> {
                             <div className="card-body">
                                 <div className="booking-doc-info">
                                     <a href="doctor-profile.html" className="booking-doc-img">
-                                        <img src={logo} alt="User Image" />
+                                        <img src={logo} alt="Spill logo in place of counsellor" />
                                     </a>
                                     <div className="booking-info">
                                         <h4><a href="doctor-profile.html">{this.props.counsellor.firstName} {this.props.counsellor.lastName}</a></h4>

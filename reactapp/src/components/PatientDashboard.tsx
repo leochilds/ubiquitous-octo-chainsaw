@@ -7,9 +7,6 @@ interface PatientDashboardProps {
 }
 
 export class PatientDashboard extends react.Component<PatientDashboardProps> {
-    constructor(props: PatientDashboardProps) {
-        super(props);
-    }
     render() {
         return (
             <div className='container-fluid'>

@@ -5,9 +5,6 @@ interface AppointmentsProps {
     counsellorAppointmentData: CounsellorAppointmentData
 }
 export class Apppointments extends react.Component<AppointmentsProps> {
-    constructor(props: AppointmentsProps) {
-        super(props);
-    }
     render() {
         const renderAppointments = this.props.counsellorAppointmentData.appointments.map(a => <AppointmentRow key={a.counsellor.id + a.datetime} appointment={a} />);
         return (

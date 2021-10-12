@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import moment from "moment";
 import react from "react";
 import { Appointment } from "../../data/councellors";
@@ -10,9 +11,6 @@ interface ConfirmedState {
 
 }
 export class Confirmed extends react.Component<ConfirmedProps, ConfirmedState> {
-    constructor(props: ConfirmedProps) {
-        super(props);
-    }
     render() {
         return (
             <div className="container-fluid">

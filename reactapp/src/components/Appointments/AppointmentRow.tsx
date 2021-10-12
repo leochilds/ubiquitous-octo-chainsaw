@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import react from 'react';
 import { Appointment } from '../../data/councellors';
 import logo from '../../assets/logo.png';
@@ -9,16 +10,13 @@ interface AppointmentProps {
 interface AppointmentState { }
 
 export class AppointmentRow extends react.Component<AppointmentProps, AppointmentState> {
-    constructor(props: AppointmentProps) {
-        super(props)
-    }
     render() {
         return (
             <tr>
                 <td>
                     <h2 className="table-avatar">
                         <a href="#" className="avatar avatar-sm mr-2">
-                            <img className="avatar-img rounded-circle" src={logo} alt="User Image" />
+                            <img className="avatar-img rounded-circle" src={logo} alt="Spill logo in place of counsellor" />
                         </a>
                         <a href="#">{this.props.appointment.counsellor.firstName} {this.props.appointment.counsellor.lastName}</a>
                     </h2>

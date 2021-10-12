@@ -8,9 +8,6 @@ interface CounsellorResultsProps {
 interface CounsellorResultsState {
 }
 export class CounsellorResults extends react.Component<CounsellorResultsProps, CounsellorResultsState> {
-    constructor(props: CounsellorResultsProps) {
-        super(props)
-    }
     render() {
         const renderCounsellors = this.props.counsellorList.map(c => <CounsellorSearchCard goToBookingPage={this.props.goToBookingPage} key={c.id} counsellor={c} />)
         return (

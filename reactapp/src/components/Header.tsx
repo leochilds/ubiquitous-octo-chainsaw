@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import react from "react";
 import logo from '../assets/transparentlogo.png';
 
@@ -6,21 +7,11 @@ interface HeaderProps {
     goToCounsellorSearchPage: () => void
 }
 export class Header extends react.Component<HeaderProps> {
-    constructor(props: HeaderProps) {
-        super(props);
-    }
     render() {
         return (
             <header className="header">
                 <nav className="navbar navbar-expand-lg header-nav">
                     <div className="navbar-header">
-                        <a id="mobile_btn" href="javascript:void(0);">
-                            <span className="bar-icon">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
-                        </a>
                         <a href="#" className="navbar-brand logo">
                             <img src={logo} className="img-fluid" alt="Logo" />
                         </a>

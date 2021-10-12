@@ -3,9 +3,6 @@ import React from "react";
 interface TopHeaderProps { }
 
 export class TopHeader extends React.Component<TopHeaderProps> {
-    constructor(props: TopHeaderProps) {
-        super(props);
-    }
     render() {
         return (
             <div className="top-header">
@@ -26,10 +23,10 @@ export class TopHeader extends React.Component<TopHeaderProps> {
                                 <div className="social-icon">
                                     <ul>
                                         <li>
-                                            <a href="https://www.facebook.com/spillchat/" target="_blank"><i className="fab fa-facebook-f"></i> </a>
+                                            <a href="https://www.facebook.com/spillchat/" rel="noreferrer" target="_blank"><i className="fab fa-facebook-f"></i> </a>
                                         </li>
                                         <li>
-                                            <a href="https://www.instagram.com/spillstagram_/?hl=en" target="_blank"><i className="fab fa-instagram"></i></a>
+                                            <a href="https://www.instagram.com/spillstagram_/?hl=en" rel="noreferrer" target="_blank"><i className="fab fa-instagram"></i></a>
                                         </li>
                                     </ul>
                                 </div>

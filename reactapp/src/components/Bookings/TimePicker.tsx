@@ -1,8 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import moment from "moment";
 import react from "react";
-import { availability } from "../../data/availability-data";
 import { CounsellorAppointmentData } from "../../data/councellors";
-import { Counsellor, counsellors } from "../../data/counsellor-data";
+import { Counsellor } from "../../data/counsellor-data";
 
 interface TimePickerProps {
     counsellor: Counsellor,

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import react from "react";
 import { Counsellor } from "../../data/counsellor-data";
 import logo from "../../assets/logo.png";
@@ -31,7 +32,7 @@ export class CounsellorSearchCard extends react.Component<CounsellorSearchCardPr
                         <div className="doc-info-left">
                             <div className="doctor-img">
                                 <a href="#">
-                                    <img src={logo} className="img-fluid" alt="User Image" />
+                                    <img src={logo} className="img-fluid" alt="Spill logo in place of counsellor" />
                                 </a>
                             </div>
                             <div className="doc-info-cont">
