@@ -55,9 +55,11 @@ export class CounsellorSearch extends react.Component<CounsellorSearchProps, Cou
     }
     render() {
         return (
-            <div className="row">
-                <SearchFilter filterResults={this.filterResults} />
-                <CounsellorResults counsellorList={this.state.availableCounsellors} />
+            <div className='container-fluid'>
+                <div className="row">
+                    <SearchFilter filterResults={this.filterResults} />
+                    <CounsellorResults counsellorList={this.state.availableCounsellors} />
+                </div>
             </div>
         )
     }

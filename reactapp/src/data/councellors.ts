@@ -47,6 +47,15 @@ export class CounsellorAppointmentData {
             })
         return availableCounsellors;
     }
+    static getCounsellorAvailability(counsellor: Counsellor, date: string) {
+        const availableTimes = counsellor.availability!.filter(a => a.datetime.includes(date)).map(a => a.datetime);
+        return availableTimes || [];
+    }
+    getCounsellorAvailabilityById(id: string, date: string): string[] {
+        const counsellor = this.counsellorAvailability.find(c => c.id = id);
+        const availableTimes = counsellor!.availability!.filter(a => a.datetime.includes(date)).map(a => a.datetime);
+        return availableTimes || [];
+    }
 }
 
 // Get Counsellors by availability
