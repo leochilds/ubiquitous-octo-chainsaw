@@ -1,4 +1,5 @@
 import react from "react";
+import { SearchFilter } from "./SearchFilter";
 interface CounsellorSearchProps { }
 export class CounsellorSearch extends react.Component<CounsellorSearchProps> {
     constructor(props: CounsellorSearchProps) {
@@ -7,7 +8,7 @@ export class CounsellorSearch extends react.Component<CounsellorSearchProps> {
     render() {
         return (
             <div className="row">
-
+                <SearchFilter />
 
                 <div className="col-md-12 col-lg-8 col-xl-9">
 

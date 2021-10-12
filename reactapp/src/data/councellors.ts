@@ -11,16 +11,28 @@ export class CouncellorAppointmentData {
             return c;
         });
     }
-    static getAppointmentTypes(): string[] {
-        const types = [...new Set(councellors.map(c => c.appointment_types).flat())];
+    static getAppointmentTypes(): { [key: string]: boolean } {
+        const typeStrings = [...new Set(councellors.map(c => c.appointment_types).flat())];
+        let types: { [key: string]: boolean } = {};
+        typeStrings.forEach(type => {
+            types[type] = false;
+        });
         return types;
     }
-    static getSpecialisms(): string[] {
-        const specialisms = [...new Set(councellors.map(c => c.specialisms).flat())];
+    static getSpecialisms(): { [key: string]: boolean } {
+        const specialismStrings = [...new Set(councellors.map(c => c.specialisms).flat())];
+        let specialisms: { [key: string]: boolean } = {};
+        specialismStrings.forEach(specialism => {
+            specialisms[specialism] = false;
+        });
         return specialisms;
     }
-    static getMediums(): string[] {
-        const mediums = [...new Set(councellors.map(c => c.appointment_mediums).flat())];
+    static getMediums(): { [key: string]: boolean } {
+        const mediumStrings = [...new Set(councellors.map(c => c.appointment_mediums).flat())];
+        let mediums: { [key: string]: boolean } = {};
+        mediumStrings.forEach(medium => {
+            mediums[medium] = false;
+        });
         return mediums;
     }
 
