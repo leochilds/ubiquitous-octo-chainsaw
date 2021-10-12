@@ -1,8 +1,10 @@
 import react from "react";
-import { CouncellorAppointmentData } from "../../data/councellors";
+import { CounsellorAppointmentData } from "../../data/councellors";
 import { FilterInput } from "./FilterInput";
-interface SearchFilterProps { }
-interface SearchFilterState {
+interface SearchFilterProps {
+    filterResults: (filters: SearchFilterState) => void
+}
+export interface SearchFilterState {
     types: { [key: string]: boolean },
     specialisms: { [key: string]: boolean },
     mediums: { [key: string]: boolean },
@@ -12,10 +14,10 @@ export class SearchFilter extends react.Component<SearchFilterProps, SearchFilte
     constructor(props: SearchFilterProps) {
         super(props)
         this.state = {
-            types: CouncellorAppointmentData.getAppointmentTypes(),
-            specialisms: CouncellorAppointmentData.getSpecialisms(),
-            mediums: CouncellorAppointmentData.getMediums(),
-            selectedDate: ''
+            types: CounsellorAppointmentData.getAppointmentTypes(),
+            specialisms: CounsellorAppointmentData.getSpecialisms(),
+            mediums: CounsellorAppointmentData.getMediums(),
+            selectedDate: '2021-08-17'
         }
         this.addRemoveTypeFilter = this.addRemoveTypeFilter.bind(this);
         this.addRemoveSpecialismFilter = this.addRemoveSpecialismFilter.bind(this);
@@ -51,8 +53,9 @@ export class SearchFilter extends react.Component<SearchFilterProps, SearchFilte
 
     }
     handleSearch() {
-        console.info('Ran Search function not yet implmented');
-        console.info('State:', this.state)
+        const filters = { ...this.state }
+        this.props.filterResults(filters);
+        console.info('Called filter: ', filters)
     }
     render() {
         const renderInput = (filter: { [key: string]: boolean; }, func: { (key: string): void; }) => {
@@ -73,7 +76,7 @@ export class SearchFilter extends react.Component<SearchFilterProps, SearchFilte
                     </div>
                     <div className="card-body">
                         <div className="filter-widget">
-                            <input type="date" className="form-control" placeholder="Select Date" onChange={this.handleSelectDate} />
+                            <input type="date" className="form-control" placeholder="Select Date" value={this.state.selectedDate} onChange={this.handleSelectDate} />
                         </div>
                         <div className="filter-widget">
                             <h4>Appointment Type</h4>
