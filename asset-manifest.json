@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.ea1455b2.chunk.css",
-    "main.js": "/static/js/main.53a9cceb.chunk.js",
-    "main.js.map": "/static/js/main.53a9cceb.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.a8dca14d.js",
-    "runtime-main.js.map": "/static/js/runtime-main.a8dca14d.js.map",
-    "static/js/2.d92da81a.chunk.js": "/static/js/2.d92da81a.chunk.js",
-    "static/js/2.d92da81a.chunk.js.map": "/static/js/2.d92da81a.chunk.js.map",
-    "static/js/3.1b3e993a.chunk.js": "/static/js/3.1b3e993a.chunk.js",
-    "static/js/3.1b3e993a.chunk.js.map": "/static/js/3.1b3e993a.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.ea1455b2.chunk.css.map": "/static/css/main.ea1455b2.chunk.css.map",
-    "static/js/2.d92da81a.chunk.js.LICENSE.txt": "/static/js/2.d92da81a.chunk.js.LICENSE.txt",
-    "static/media/transparentlogo.a646c03c.png": "/static/media/transparentlogo.a646c03c.png"
+    "main.css": "/ubiquitous-octo-chainsaw/static/css/main.ea1455b2.chunk.css",
+    "main.js": "/ubiquitous-octo-chainsaw/static/js/main.53a9cceb.chunk.js",
+    "main.js.map": "/ubiquitous-octo-chainsaw/static/js/main.53a9cceb.chunk.js.map",
+    "runtime-main.js": "/ubiquitous-octo-chainsaw/static/js/runtime-main.3d499f69.js",
+    "runtime-main.js.map": "/ubiquitous-octo-chainsaw/static/js/runtime-main.3d499f69.js.map",
+    "static/js/2.d92da81a.chunk.js": "/ubiquitous-octo-chainsaw/static/js/2.d92da81a.chunk.js",
+    "static/js/2.d92da81a.chunk.js.map": "/ubiquitous-octo-chainsaw/static/js/2.d92da81a.chunk.js.map",
+    "static/js/3.1b3e993a.chunk.js": "/ubiquitous-octo-chainsaw/static/js/3.1b3e993a.chunk.js",
+    "static/js/3.1b3e993a.chunk.js.map": "/ubiquitous-octo-chainsaw/static/js/3.1b3e993a.chunk.js.map",
+    "index.html": "/ubiquitous-octo-chainsaw/index.html",
+    "static/css/main.ea1455b2.chunk.css.map": "/ubiquitous-octo-chainsaw/static/css/main.ea1455b2.chunk.css.map",
+    "static/js/2.d92da81a.chunk.js.LICENSE.txt": "/ubiquitous-octo-chainsaw/static/js/2.d92da81a.chunk.js.LICENSE.txt",
+    "static/media/transparentlogo.a646c03c.png": "/ubiquitous-octo-chainsaw/static/media/transparentlogo.a646c03c.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.a8dca14d.js",
+    "static/js/runtime-main.3d499f69.js",
     "static/js/2.d92da81a.chunk.js",
     "static/css/main.ea1455b2.chunk.css",
     "static/js/main.53a9cceb.chunk.js"
