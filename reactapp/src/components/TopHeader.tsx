@@ -15,12 +15,12 @@ export class TopHeader extends React.Component<TopHeaderProps> {
                     <div className="row d-flex justify-content-between">
                         <ul className="d-flex justify-content-between align-items-center">
                             <li>
-                                <i className="fas fa-phone-alt"></i>
-                                Contact Number : 090 98763456
+                                <i className="fas fa-at"></i>
+                                Contact Email : hi@spill.chat
                             </li>
                             <li>
                                 <i className="fas fa-map-marker-alt"></i>
-                                Location : 22, South Wales, New York
+                                Location : 9th Floor 107 Cheapside, London, United Kingdom, EC2V 6DN
                             </li>
                         </ul>
                         <ul className="d-flex justify-content-between align-items-center">
@@ -28,25 +28,10 @@ export class TopHeader extends React.Component<TopHeaderProps> {
                                 <div className="social-icon">
                                     <ul>
                                         <li>
-                                            <a href="#" target="_blank"><i className="fab fa-facebook-f"></i> </a>
+                                            <a href="https://www.facebook.com/spillchat/" target="_blank"><i className="fab fa-facebook-f"></i> </a>
                                         </li>
                                         <li>
-                                            <a href="#" target="_blank"><i className="fab fa-google-plus-g"></i> </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" target="_blank"><i className="fab fa-instagram"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" target="_blank"><i className="fab fa-twitter"></i> </a>
-                                        </li>
-                                        <li>
-                                            <div className="form-group">
-                                                <select className="form-control" id="exampleFormControlSelect1">
-                                                    <option>English</option>
-                                                    <option>Arabic</option>
-                                                    <option>Turkish</option>
-                                                </select>
-                                            </div>
+                                            <a href="https://www.instagram.com/spillstagram_/?hl=en" target="_blank"><i className="fab fa-instagram"></i></a>
                                         </li>
                                     </ul>
                                 </div>
