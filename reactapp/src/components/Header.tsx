@@ -1,7 +1,10 @@
 import react from "react";
 import logo from '../assets/transparentlogo.png';
 
-interface HeaderProps { }
+interface HeaderProps {
+    goToAppointmentsPage: () => void,
+    goToCounsellorSearchPage: () => void
+}
 export class Header extends react.Component<HeaderProps> {
     constructor(props: HeaderProps) {
         super(props);
@@ -30,10 +33,10 @@ export class Header extends react.Component<HeaderProps> {
                         </div>
                         <ul className="main-nav mr-auto">
                             <li>
-                                <a href="#">Appointments</a>
+                                <a onClick={this.props.goToAppointmentsPage} href="#">Appointments</a>
                             </li>
                             <li>
-                                <a href="#">Make a Booking</a>
+                                <a onClick={this.props.goToCounsellorSearchPage} href="#">Make a Booking</a>
                             </li>
                         </ul>
                     </div>

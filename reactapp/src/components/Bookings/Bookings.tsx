@@ -22,8 +22,8 @@ export class Booking extends react.Component<BookingProps, BookingState> {
         this.state = {
             selectedDate: this.props.selectedDate,
             selectedTime: { datetime: '', id: '' },
-            selectedType: '',
-            selectedMedium: ''
+            selectedType: this.props.counsellor.appointment_types[0],
+            selectedMedium: this.props.counsellor.appointment_mediums[0]
         }
         this.selectAppointment = this.selectAppointment.bind(this);
         this.handleSelectMedium = this.handleSelectMedium.bind(this);

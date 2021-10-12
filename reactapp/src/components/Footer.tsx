@@ -1,7 +1,10 @@
 import React from "react";
 import logo from '../assets/transparentlogo.png';
 
-interface FooterProps { }
+interface FooterProps {
+    goToAppointmentsPage: () => void,
+    goToCounsellorSearchPage: () => void
+}
 export class Footer extends React.Component<FooterProps> {
     constructor(props: FooterProps) {
         super(props);
@@ -30,10 +33,10 @@ export class Footer extends React.Component<FooterProps> {
 
                         <ul className="footer-nav">
                             <li>
-                                <a href="#">Appointments</a>
+                                <a onClick={this.props.goToAppointmentsPage} href="#">Appointments</a>
                             </li>
                             <li>
-                                <a href="#">Booking</a>
+                                <a onClick={this.props.goToCounsellorSearchPage} href="#">Booking</a>
                             </li>
                         </ul>
                     </div>

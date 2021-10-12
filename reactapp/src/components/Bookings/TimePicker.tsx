@@ -65,7 +65,7 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
         });
         const renderDayColumns = this.state.week.map((day: { date: string, times: { datetime: string, id: string }[] }) => {
             const times = day.times.map(t => <a key={t.id} onClick={() => this.picktime(day.date, t)} className={this.state.selectedTime.id === t.id && this.state.selectedDate === day.date ? 'selected timing' : 'timing'} href="#">
-                <span>{t.datetime.substring(11, 16)}</span>
+                <span>{moment(t.datetime).format('HH:mm')}</span>
             </a>)
             return (
                 <li key={day.date}>
@@ -123,7 +123,7 @@ const getAvailability = (counsellor: Counsellor, selectedDate: string): { date: 
     const availability = week.map(date => {
         return {
             date: date,
-            times: CounsellorAppointmentData.getCounsellorAvailability(counsellor, date).sort()
+            times: CounsellorAppointmentData.getCounsellorAvailability(counsellor, date).sort((a, b) => (a.datetime > b.datetime ? 1 : -1))
         }
     });
     return availability;

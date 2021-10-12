@@ -1,8 +1,10 @@
+import moment from "moment";
 import react from "react";
 import { Appointment } from "../../data/councellors";
 
 interface ConfirmedProps {
     lastBooking: Appointment
+    goToAppointments: () => void
 }
 interface ConfirmedState {
 
@@ -23,8 +25,8 @@ export class Confirmed extends react.Component<ConfirmedProps, ConfirmedState> {
                                 <div className="success-cont">
                                     <i className="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
-                                    <p>Appointment booked with <strong>Dr. Mary Nielson</strong><br /> on <strong>12 Nov 2020 5:00PM to 6:00PM</strong></p>
-                                    <a href="invoice-view.html" className="btn btn-primary view-inv-btn">View Invoice</a>
+                                    <p><span style={{ textTransform: 'capitalize' }}>{this.props.lastBooking.type.replace(/_/i, ' ')}</span> appointment via {this.props.lastBooking.medium} booked with <strong>{this.props.lastBooking.counsellor.firstName} {this.props.lastBooking.counsellor.lastName}</strong><br /> on <strong>{moment(this.props.lastBooking.datetime).format('MMMM Do YYYY, h:mm a')}</strong></p>
+                                    <a onClick={this.props.goToAppointments} href="#" className="btn btn-primary view-inv-btn">View Appointments</a>
                                 </div>
                             </div>
                         </div>

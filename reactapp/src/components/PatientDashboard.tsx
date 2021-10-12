@@ -1,7 +1,10 @@
 import react from "react";
-import { Apppointments } from "./Appointments";
+import { CounsellorAppointmentData } from "../data/councellors";
+import { Apppointments } from "./Appointments/Appointments";
 
-interface PatientDashboardProps { }
+interface PatientDashboardProps {
+    counsellorAppointmentData: CounsellorAppointmentData
+}
 
 export class PatientDashboard extends react.Component<PatientDashboardProps> {
     constructor(props: PatientDashboardProps) {
@@ -54,7 +57,7 @@ export class PatientDashboard extends react.Component<PatientDashboardProps> {
 
                                 <div className="tab-content pt-0">
 
-                                    <Apppointments />
+                                    <Apppointments counsellorAppointmentData={this.props.counsellorAppointmentData} />
 
 
                                 </div>

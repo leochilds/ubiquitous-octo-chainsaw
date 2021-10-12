@@ -36,7 +36,6 @@ export class CounsellorSearchCard extends react.Component<CounsellorSearchCardPr
                             </div>
                             <div className="doc-info-cont">
                                 <h4 className="doc-name"><a href="#">{this.props.counsellor.firstName} {this.props.counsellor.lastName}</a></h4>
-                                <h5 className="doc-department">Physical stress</h5>
                                 <div className="clinic-services">
                                     {renderFilters}
                                 </div>

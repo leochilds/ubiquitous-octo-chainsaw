@@ -10,10 +10,7 @@ function App() {
   const counsellorAppointmentData = new CounsellorAppointmentData()
   return (
     <div className="App main-wrapper">
-      <TopHeader />
-      <Header />
       <MainArea counsellorAppointmentData={counsellorAppointmentData} />
-      <Footer />
     </div>
   );
 }
