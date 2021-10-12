@@ -1,8 +1,6 @@
 import React from "react";
 
-interface TopHeaderProps {
-
-}
+interface TopHeaderProps { }
 
 export class TopHeader extends React.Component<TopHeaderProps> {
     constructor(props: TopHeaderProps) {
