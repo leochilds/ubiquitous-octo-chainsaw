@@ -54,20 +54,24 @@ export class BookingWizard extends react.Component<any, any>{
             selectedCounsellor: counsellor
         })
     }
+    renderSlide(slideNumber: number) {
+        const slides = [<DisclaimerSection display={this.state.slide === 0} changeSlide={this.changeSlide} />,
+        <AppointmentTypeSelection display={this.state.slide === 1} handleTypeSelection={this.handleTypeSelection} changeSlide={this.changeSlide} />,
+        <DateSelection display={this.state.slide === 2} handleChangeDate={this.handleChangeDate} changeSlide={this.changeSlide} />,
+        <CounsellorSelection
+            display={this.state.slide === 3}
+            availableCounsellors={this.state.availableCounsellors}
+            changeSlide={this.changeSlide} availableTimes={this.state.availableTimes}
+            handleChangeTime={this.handleChangeTime}
+            handleSelectCounsellor={this.handleSelectCounsellor}
+        />]
+        return slides[slideNumber];
+    }
     render() {
         return (
             <div>
                 <form className="w3-container">
-                    <DisclaimerSection display={this.state.slide === 0} changeSlide={this.changeSlide} />
-                    <AppointmentTypeSelection display={this.state.slide === 1} handleTypeSelection={this.handleTypeSelection} changeSlide={this.changeSlide} />
-                    <DateSelection display={this.state.slide === 2} handleChangeDate={this.handleChangeDate} changeSlide={this.changeSlide} />
-                    <CounsellorSelection
-                        display={this.state.slide === 3}
-                        availableCounsellors={this.state.availableCounsellors}
-                        changeSlide={this.changeSlide} availableTimes={this.state.availableTimes}
-                        handleChangeTime={this.handleChangeTime}
-                        handleSelectCounsellor={this.handleSelectCounsellor}
-                    />
+                    {this.renderSlide(this.state.slide)}
                 </form>
                 <BookingConfirmation
                     display={this.state.slide === 4}

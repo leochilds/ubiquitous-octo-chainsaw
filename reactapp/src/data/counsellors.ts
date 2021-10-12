@@ -31,6 +31,7 @@ export class CounsellorAppointmentData {
         const filteredByDate = allTimes.filter(t => t.includes(date));
         const unique = [...new Set(filteredByDate)];
         const times = unique.map(u => u.substring(11, 16)).sort();
+        console.info('Times:', times)
         return times;
     }
     getAvailableCounsellors(type: string, date: string, time: string): Counsellor[] {
