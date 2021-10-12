@@ -1714,7 +1714,7 @@ button.bg-danger:hover {
 -----------------------*/
 
 .top-header {
-	background-color: #041549;
+	background-color: #374151;
 	padding: 7px 15px;
 }
 .top-header ul {
@@ -1812,7 +1812,7 @@ button.bg-danger:hover {
 	display: block;
     font-size: 15px;
     font-weight: 600;
-    color: #374151;
+    color: #F3F4F6;
 }
 .main-nav li.login-link {
 	display: none;
@@ -8209,4 +8209,8 @@ span.call-duration.float-right {
     font-size: 12px;
     padding: 6px 10px;
     background: #f7f7f7;
+}
+
+.header-nav{
+	background-color: #041549;
 }
