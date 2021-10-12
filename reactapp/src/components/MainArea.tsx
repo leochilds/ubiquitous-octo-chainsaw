@@ -1,5 +1,6 @@
 import react from "react";
 import { CounsellorAppointmentData } from "../data/councellors";
+import { Counsellor, counsellors } from "../data/counsellor-data";
 import { Booking } from "./Bookings/Bookings";
 import { CounsellorSearch } from "./Bookings/CounsellorSearch";
 import { PatientDashboard } from "./PatientDashboard";
@@ -7,27 +8,40 @@ interface MainAreaProps {
     counsellorAppointmentData: CounsellorAppointmentData
 }
 interface MainAreaState {
-    page: number
+    page: number,
+    selectedCounsellor: Counsellor
 }
 export class MainArea extends react.Component<MainAreaProps, MainAreaState> {
-    pages: JSX.Element[];
     constructor(props: MainAreaProps) {
         super(props);
         this.state = {
-            page: 2
+            page: 1,
+            selectedCounsellor: this.props.counsellorAppointmentData.counsellorAvailability[0]
         }
-        this.pages = [
-            <PatientDashboard />,
-            <CounsellorSearch counsellorAppointmentData={this.props.counsellorAppointmentData} />,
-            <Booking counsellor={this.props.counsellorAppointmentData.counsellorAvailability[0]} selectedDate="2021-08-17" />
-        ]
+        this.handleSelectCounsellor = this.handleSelectCounsellor.bind(this);
+        this.goToBookingPage = this.goToBookingPage.bind(this);
+
+    }
+    handleSelectCounsellor(counsellor: Counsellor) {
+        this.setState({
+            selectedCounsellor: counsellor
+        }, () => {
+            this.goToBookingPage();
+        })
+
+    }
+    goToBookingPage() {
+        this.setState({
+            page: 2
+        });
     }
     render() {
-        const renderPage = this.pages[this.state.page];
         return (
             <div className="content">
 
-                {renderPage}
+                {this.state.page === 0 && <PatientDashboard />}
+                {this.state.page === 1 && <CounsellorSearch counsellorAppointmentData={this.props.counsellorAppointmentData} goToBookingPage={this.handleSelectCounsellor} />}
+                {this.state.page === 2 && <Booking counsellor={this.state.selectedCounsellor} selectedDate="2021-08-17" />}
 
             </div>
         )

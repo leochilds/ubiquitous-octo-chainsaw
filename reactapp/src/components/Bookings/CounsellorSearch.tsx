@@ -4,7 +4,8 @@ import { Counsellor } from "../../data/counsellor-data";
 import { CounsellorResults } from "./CounsellorResults";
 import { SearchFilter, SearchFilterState } from "./SearchFilter";
 interface CounsellorSearchProps {
-    counsellorAppointmentData: CounsellorAppointmentData
+    counsellorAppointmentData: CounsellorAppointmentData,
+    goToBookingPage: (counsellor: Counsellor) => void
 }
 interface CounsellorSearchState {
     selectedDate: string,
@@ -58,7 +59,7 @@ export class CounsellorSearch extends react.Component<CounsellorSearchProps, Cou
             <div className='container-fluid'>
                 <div className="row">
                     <SearchFilter filterResults={this.filterResults} />
-                    <CounsellorResults counsellorList={this.state.availableCounsellors} />
+                    <CounsellorResults goToBookingPage={this.props.goToBookingPage} counsellorList={this.state.availableCounsellors} />
                 </div>
             </div>
         )

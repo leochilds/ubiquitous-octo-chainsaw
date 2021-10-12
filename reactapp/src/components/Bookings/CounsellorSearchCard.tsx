@@ -3,17 +3,25 @@ import { Counsellor } from "../../data/counsellor-data";
 import logo from "../../assets/logo.png";
 
 interface CounsellorSearchCardProps {
+    counsellor: Counsellor,
+    goToBookingPage: (counsellor: Counsellor) => void
+}
+interface CounsellorSearchCardState {
     counsellor: Counsellor
 }
-
-export class CounsellorSearchCard extends react.Component<CounsellorSearchCardProps> {
-    counsellor: Counsellor;
+export class CounsellorSearchCard extends react.Component<CounsellorSearchCardProps, CounsellorSearchCardState> {
     constructor(props: CounsellorSearchCardProps) {
         super(props)
-        this.counsellor = { ...props.counsellor }
+        this.state = {
+            counsellor: this.props.counsellor
+        }
+        this.bookCounsellor = this.bookCounsellor.bind(this);
+    }
+    bookCounsellor() {
+        this.props.goToBookingPage(this.state.counsellor)
     }
     render() {
-        const renderFilters = [...this.counsellor.appointment_types, ...this.counsellor.appointment_mediums, ...this.counsellor.specialisms].map((s: string) => {
+        const renderFilters = [...this.props.counsellor.appointment_types, ...this.props.counsellor.appointment_mediums, ...this.props.counsellor.specialisms].map((s: string) => {
             return <span key={s} style={{ marginBottom: 5, textTransform: 'capitalize' }}>{s.replace(/_/i, ' ')}</span>
         });
         return (
@@ -27,7 +35,7 @@ export class CounsellorSearchCard extends react.Component<CounsellorSearchCardPr
                                 </a>
                             </div>
                             <div className="doc-info-cont">
-                                <h4 className="doc-name"><a href="#">{this.counsellor.firstName} {this.counsellor.lastName}</a></h4>
+                                <h4 className="doc-name"><a href="#">{this.props.counsellor.firstName} {this.props.counsellor.lastName}</a></h4>
                                 <h5 className="doc-department">Physical stress</h5>
                                 <div className="clinic-services">
                                     {renderFilters}
@@ -36,7 +44,7 @@ export class CounsellorSearchCard extends react.Component<CounsellorSearchCardPr
                         </div>
                         <div className="doc-info-right">
                             <div className="clinic-booking">
-                                <a className="apt-btn" href="#">Book Appointment</a>
+                                <a onClick={this.bookCounsellor} className="apt-btn" href="#">Book Appointment</a>
                             </div>
                         </div>
                     </div>

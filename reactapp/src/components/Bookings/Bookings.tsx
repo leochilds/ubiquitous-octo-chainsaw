@@ -7,13 +7,43 @@ interface BookingProps {
     counsellor: Counsellor,
     selectedDate: string
 }
-interface BookingState { }
+interface BookingState {
+    selectedDate: string,
+    selectedTime: string,
+    selectedType: string,
+    selectedMedium: string
+}
 export class Booking extends react.Component<BookingProps, BookingState> {
     constructor(props: BookingProps) {
         super(props)
+        this.state = {
+            selectedDate: this.props.selectedDate,
+            selectedTime: '',
+            selectedType: '',
+            selectedMedium: ''
+        }
+        this.selectAppointment = this.selectAppointment.bind(this);
+        this.handleSelectMedium = this.handleSelectMedium.bind(this);
+        this.handleSelectType = this.handleSelectType.bind(this);
     }
-    counsellor = { ...this.props.counsellor }
+    selectAppointment(day: string, time: string) {
+        this.setState({
+            selectedDate: day,
+            selectedTime: time
+        })
+    }
+    handleSelectType(event: React.ChangeEvent<HTMLSelectElement>) {
+        this.setState({
+            selectedType: event.target.value
+        })
+    }
+    handleSelectMedium(event: React.ChangeEvent<HTMLSelectElement>) {
+        this.setState({
+            selectedMedium: event.target.value
+        })
+    }
     render() {
+        const optionStyle: react.CSSProperties = { textTransform: 'capitalize' };
         return (
             <div className="container">
 
@@ -27,20 +57,33 @@ export class Booking extends react.Component<BookingProps, BookingState> {
                                         <img src={logo} alt="User Image" />
                                     </a>
                                     <div className="booking-info">
-                                        <h4><a href="doctor-profile.html">{this.counsellor.firstName} {this.counsellor.lastName}</a></h4>
+                                        <h4><a href="doctor-profile.html">{this.props.counsellor.firstName} {this.props.counsellor.lastName}</a></h4>
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <label>Type</label>
+                                                <select value={this.state.selectedType} onChange={this.handleSelectType} className="form-control">
+                                                    {this.props.counsellor.appointment_types.map(t => <option value={t} style={optionStyle} key={t}>{t.replace(/_/i, ' ')}</option>)}
+                                                </select>
+                                            </div>
+                                            <div className="col-6"><label>Medium</label>
+                                                <select value={this.state.selectedMedium} onChange={this.handleSelectMedium} className="form-control" style={optionStyle}>
+                                                    {this.props.counsellor.appointment_mediums.map(m => <option value={m} style={optionStyle} key={m}>{m}</option>)}
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-12 col-sm-4 col-md-6">
-                                <h4 className="mb-1">{moment(this.props.selectedDate).format('Do MMMM YYYY')}</h4>
-                                <p className="text-muted">{moment(this.props.selectedDate).format('dddd')}</p>
+                                <h4 className="mb-1">{moment(this.state.selectedDate).format('Do MMMM YYYY')} {this.state.selectedTime}</h4>
+                                <p className="text-muted">{moment(this.state.selectedDate).format('dddd')}</p>
                             </div>
                         </div>
-                        <TimePicker counsellor={this.props.counsellor} />
+                        <TimePicker selectAppointment={this.selectAppointment} counsellor={this.props.counsellor} selectedDate='2021-08-17' />
                         <div className="submit-section proceed-btn text-right">
-                            <a href="checkout.html" className="btn btn-primary submit-btn">Confirm Booking</a>
+                            <a href="#" className="btn btn-primary submit-btn">Confirm Booking</a>
                         </div>
 
                     </div>

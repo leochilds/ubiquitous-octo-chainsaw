@@ -5,18 +5,51 @@ import { CounsellorAppointmentData } from "../../data/councellors";
 import { Counsellor, counsellors } from "../../data/counsellor-data";
 
 interface TimePickerProps {
-    counsellor: Counsellor
+    counsellor: Counsellor,
+    selectedDate: string,
+    selectAppointment: (day: string, time: string) => void
 }
 interface TimePickerState {
-    week: any
+    week: any,
+    trackingDate: string,
+    selectedDate: string,
+    selectedTime: string
 }
 
 export class TimePicker extends react.Component<TimePickerProps, TimePickerState> {
     constructor(props: TimePickerProps) {
         super(props);
         this.state = {
-            week: getAvailability(this.props.counsellor, '2021-08-17')
+            trackingDate: this.props.selectedDate,
+            week: getAvailability(this.props.counsellor, this.props.selectedDate),
+            selectedDate: '',
+            selectedTime: ''
         }
+        this.nextWeek = this.nextWeek.bind(this);
+        this.lastWeek = this.lastWeek.bind(this);
+        this.picktime = this.picktime.bind(this);
+    }
+    nextWeek() {
+        const nextWeekDate = moment(this.state.trackingDate).add(1, 'weeks').format('YYYY-MM-DD');
+        this.setState({
+            trackingDate: nextWeekDate,
+            week: getAvailability(this.props.counsellor, nextWeekDate)
+        })
+    }
+    lastWeek() {
+        const lastWeekDate = moment(this.state.trackingDate).subtract(1, 'weeks').format('YYYY-MM-DD');
+        this.setState({
+            trackingDate: lastWeekDate,
+            week: getAvailability(this.props.counsellor, lastWeekDate)
+        })
+
+    }
+    picktime(date: string, time: string) {
+        this.setState({
+            selectedDate: date,
+            selectedTime: time
+        })
+        this.props.selectAppointment(date, time);
     }
     render() {
         const renderDayRow = this.state.week.map((day: { date: string, times: string[] }) => {
@@ -28,11 +61,11 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
             )
         });
         const renderDayColumns = this.state.week.map((day: { date: string, times: string[] }) => {
-            const times = day.times.map(t => <a className="timing" href="#">
+            const times = day.times.map(t => <a key={t} onClick={() => this.picktime(day.date, t)} className={this.state.selectedTime === t && this.state.selectedDate === day.date ? 'selected timing' : 'timing'} href="#">
                 <span>{t}</span>
             </a>)
             return (
-                <li>
+                <li key={day.date}>
                     {times}
                 </li>
             )
@@ -46,13 +79,13 @@ export class TimePicker extends react.Component<TimePickerProps, TimePickerState
                             <div className="day-slot">
                                 <ul>
                                     <li className="left-arrow">
-                                        <a href="">
+                                        <a onClick={this.lastWeek} href="#">
                                             <i className="fa fa-chevron-left"></i>
                                         </a>
                                     </li>
                                     {renderDayRow}
                                     <li className="right-arrow">
-                                        <a href="">
+                                        <a onClick={this.nextWeek} href="#">
                                             <i className="fa fa-chevron-right"></i>
                                         </a>
                                     </li>
