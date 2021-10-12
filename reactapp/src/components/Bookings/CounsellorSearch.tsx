@@ -3,7 +3,9 @@ import { CounsellorAppointmentData } from "../../data/councellors";
 import { Counsellor } from "../../data/counsellor-data";
 import { CounsellorResults } from "./CounsellorResults";
 import { SearchFilter, SearchFilterState } from "./SearchFilter";
-interface CounsellorSearchProps { }
+interface CounsellorSearchProps {
+    counsellorAppointmentData: CounsellorAppointmentData
+}
 interface CounsellorSearchState {
     selectedDate: string,
     appointmentTypes: string[],
@@ -12,16 +14,14 @@ interface CounsellorSearchState {
     availableCounsellors: Counsellor[]
 }
 export class CounsellorSearch extends react.Component<CounsellorSearchProps, CounsellorSearchState> {
-    counsellorsAppointmentData: CounsellorAppointmentData;
     constructor(props: CounsellorSearchProps) {
         super(props)
-        this.counsellorsAppointmentData = new CounsellorAppointmentData();
         this.state = {
             selectedDate: '',
             appointmentTypes: [],
             appointmentMediums: [],
             counsellorSpecialisms: [],
-            availableCounsellors: this.counsellorsAppointmentData.counsellorAvailability
+            availableCounsellors: props.counsellorAppointmentData.counsellorAvailability
         }
         this.filterResults = this.filterResults.bind(this);
     }
@@ -50,7 +50,7 @@ export class CounsellorSearch extends react.Component<CounsellorSearchProps, Cou
             appointmentMediums: mediums.length ? mediums : Object.keys(CounsellorAppointmentData.getMediums()),
             counsellorSpecialisms: specialisms.length ? specialisms : Object.keys(CounsellorAppointmentData.getSpecialisms())
         };
-        state['availableCounsellors'] = this.counsellorsAppointmentData.getAvailableCounsellors(state.selectedDate, state.appointmentTypes, state.appointmentMediums, state.counsellorSpecialisms)
+        state['availableCounsellors'] = this.props.counsellorAppointmentData.getAvailableCounsellors(state.selectedDate, state.appointmentTypes, state.appointmentMediums, state.counsellorSpecialisms)
         this.setState(state)
     }
     render() {

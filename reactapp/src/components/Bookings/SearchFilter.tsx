@@ -61,7 +61,7 @@ export class SearchFilter extends react.Component<SearchFilterProps, SearchFilte
         const renderInput = (filter: { [key: string]: boolean; }, func: { (key: string): void; }) => {
             const inputs = [];
             for (const key in filter) {
-                inputs.push(<FilterInput type={{ key: key, selected: filter[key] }} handleCheck={func} />)
+                inputs.push(<FilterInput key={key} type={{ key: key, selected: filter[key] }} handleCheck={func} />)
             }
             return inputs;
         }

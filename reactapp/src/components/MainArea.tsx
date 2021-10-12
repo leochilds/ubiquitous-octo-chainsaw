@@ -1,7 +1,10 @@
 import react from "react";
+import { CounsellorAppointmentData } from "../data/councellors";
 import { CounsellorSearch } from "./Bookings/CounsellorSearch";
 import { PatientDashboard } from "./PatientDashboard";
-interface MainAreaProps { }
+interface MainAreaProps {
+    counsellorAppointmentData: CounsellorAppointmentData
+}
 interface MainAreaState {
     page: number
 }
@@ -14,7 +17,7 @@ export class MainArea extends react.Component<MainAreaProps, MainAreaState> {
         }
         this.pages = [
             <PatientDashboard />,
-            <CounsellorSearch />
+            <CounsellorSearch counsellorAppointmentData={this.props.counsellorAppointmentData} />
         ]
     }
     render() {
