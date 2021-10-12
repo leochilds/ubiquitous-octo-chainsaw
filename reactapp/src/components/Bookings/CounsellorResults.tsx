@@ -12,7 +12,9 @@ export class CounsellorResults extends react.Component<CounsellorResultsProps, C
         const renderCounsellors = this.props.counsellorList.map(c => <CounsellorSearchCard goToBookingPage={this.props.goToBookingPage} key={c.id} counsellor={c} />)
         return (
             <div className="col-md-12 col-lg-8 col-xl-9">
-                {renderCounsellors}
+                {renderCounsellors.length ? renderCounsellors : <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                    No counsellors where found with your selected parameters
+                </div>}
             </div>
         )
     }

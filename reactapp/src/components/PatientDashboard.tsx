@@ -26,14 +26,6 @@ export class PatientDashboard extends react.Component<PatientDashboardProps> {
                             </div>
                             <div className="dashboard-widget">
                                 <nav className="dashboard-menu">
-                                    <ul>
-                                        <li className="active">
-                                            <a href="patient-dashboard.html">
-                                                <i className="fas fa-columns"></i>
-                                                <span>Appointments</span>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </nav>
                             </div>
 
