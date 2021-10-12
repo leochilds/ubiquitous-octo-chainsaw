@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ubiquitous-octo-chainsaw/static/css/main.ea1455b2.chunk.css",
-    "main.js": "/ubiquitous-octo-chainsaw/static/js/main.53a9cceb.chunk.js",
-    "main.js.map": "/ubiquitous-octo-chainsaw/static/js/main.53a9cceb.chunk.js.map",
+    "main.js": "/ubiquitous-octo-chainsaw/static/js/main.744117e2.chunk.js",
+    "main.js.map": "/ubiquitous-octo-chainsaw/static/js/main.744117e2.chunk.js.map",
     "runtime-main.js": "/ubiquitous-octo-chainsaw/static/js/runtime-main.3d499f69.js",
     "runtime-main.js.map": "/ubiquitous-octo-chainsaw/static/js/runtime-main.3d499f69.js.map",
     "static/js/2.d92da81a.chunk.js": "/ubiquitous-octo-chainsaw/static/js/2.d92da81a.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.3d499f69.js",
     "static/js/2.d92da81a.chunk.js",
     "static/css/main.ea1455b2.chunk.css",
-    "static/js/main.53a9cceb.chunk.js"
+    "static/js/main.744117e2.chunk.js"
   ]
 }
