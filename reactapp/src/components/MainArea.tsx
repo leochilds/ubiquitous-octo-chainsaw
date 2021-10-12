@@ -1,5 +1,5 @@
 import react from "react";
-import { CounsellorAppointmentData } from "../data/councellors";
+import { Appointment, CounsellorAppointmentData } from "../data/councellors";
 import { Counsellor, counsellors } from "../data/counsellor-data";
 import { Booking } from "./Bookings/Bookings";
 import { Confirmed } from "./Bookings/Confirmed";
@@ -10,18 +10,21 @@ interface MainAreaProps {
 }
 interface MainAreaState {
     page: number,
-    selectedCounsellor: Counsellor,
-    selectedDate: string
+    selectedCounsellor: Counsellor | null,
+    selectedDate: string,
+    lastBooking: Appointment | null
 }
 export class MainArea extends react.Component<MainAreaProps, MainAreaState> {
     constructor(props: MainAreaProps) {
         super(props);
         this.state = {
-            page: 3,
-            selectedCounsellor: this.props.counsellorAppointmentData.counsellorAvailability[0],
-            selectedDate: '2021-08-17'
+            page: 1,
+            selectedCounsellor: null,
+            selectedDate: '2021-08-17',
+            lastBooking: null
         }
         this.goToBookingPage = this.goToBookingPage.bind(this);
+        this.goToConfirmedPage = this.goToConfirmedPage.bind(this);
 
     }
     goToBookingPage(counsellor: Counsellor, date: string) {
@@ -31,14 +34,19 @@ export class MainArea extends react.Component<MainAreaProps, MainAreaState> {
             selectedDate: date
         })
     }
+    goToConfirmedPage(appointment: Appointment) {
+        this.setState({
+            page: 3,
+            lastBooking: appointment
+        })
+    }
     render() {
         return (
             <div className="content">
-
                 {this.state.page === 0 && <PatientDashboard />}
                 {this.state.page === 1 && <CounsellorSearch counsellorAppointmentData={this.props.counsellorAppointmentData} goToBookingPage={this.goToBookingPage} />}
-                {this.state.page === 2 && <Booking counsellor={this.state.selectedCounsellor} selectedDate={this.state.selectedDate} />}
-                {this.state.page === 3 && <Confirmed />}
+                {this.state.page === 2 && <Booking counsellorAppointmentData={this.props.counsellorAppointmentData} goToConfirmedPage={this.goToConfirmedPage} counsellor={this.state.selectedCounsellor!} selectedDate={this.state.selectedDate} />}
+                {this.state.page === 3 && <Confirmed lastBooking={this.state.lastBooking!} />}
             </div>
         )
     }

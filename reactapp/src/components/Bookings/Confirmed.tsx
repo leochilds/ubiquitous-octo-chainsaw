@@ -1,6 +1,16 @@
 import react from "react";
+import { Appointment } from "../../data/councellors";
 
-export class Confirmed extends react.Component {
+interface ConfirmedProps {
+    lastBooking: Appointment
+}
+interface ConfirmedState {
+
+}
+export class Confirmed extends react.Component<ConfirmedProps, ConfirmedState> {
+    constructor(props: ConfirmedProps) {
+        super(props);
+    }
     render() {
         return (
             <div className="container-fluid">

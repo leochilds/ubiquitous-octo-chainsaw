@@ -1,7 +1,7 @@
 import { Counsellor, counsellors } from "./counsellor-data";
 import { availability } from "./availability-data";
 
-type Appointment = {
+export type Appointment = {
     counsellor: Counsellor,
     datetime: string,
     type: string,

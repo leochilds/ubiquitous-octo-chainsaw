@@ -3,9 +3,12 @@ import { Counsellor } from "../../data/counsellor-data";
 import logo from "../../assets/logo.png"
 import moment from "moment";
 import { TimePicker } from "./TimePicker";
+import { Appointment, CounsellorAppointmentData } from "../../data/councellors";
 interface BookingProps {
     counsellor: Counsellor,
-    selectedDate: string
+    selectedDate: string,
+    counsellorAppointmentData: CounsellorAppointmentData,
+    goToConfirmedPage: (appointment: Appointment) => void
 }
 interface BookingState {
     selectedDate: string,
@@ -25,6 +28,7 @@ export class Booking extends react.Component<BookingProps, BookingState> {
         this.selectAppointment = this.selectAppointment.bind(this);
         this.handleSelectMedium = this.handleSelectMedium.bind(this);
         this.handleSelectType = this.handleSelectType.bind(this);
+        this.confirmBooking = this.confirmBooking.bind(this);
     }
     selectAppointment(day: string, time: { datetime: string, id: string }) {
         this.setState({
@@ -41,6 +45,10 @@ export class Booking extends react.Component<BookingProps, BookingState> {
         this.setState({
             selectedMedium: event.target.value
         })
+    }
+    confirmBooking() {
+        const booking = this.props.counsellorAppointmentData.bookAppointment(this.props.counsellor.id, this.state.selectedTime.id, this.state.selectedType, this.state.selectedMedium);
+        this.props.goToConfirmedPage(booking);
     }
     render() {
         const optionStyle: react.CSSProperties = { textTransform: 'capitalize' };
@@ -83,7 +91,7 @@ export class Booking extends react.Component<BookingProps, BookingState> {
                         </div>
                         <TimePicker selectAppointment={this.selectAppointment} counsellor={this.props.counsellor} selectedDate='2021-08-17' />
                         <div className="submit-section proceed-btn text-right">
-                            <a href="#" className="btn btn-primary submit-btn">Confirm Booking</a>
+                            <a onClick={this.confirmBooking} href="#" className="btn btn-primary submit-btn">Confirm Booking</a>
                         </div>
 
                     </div>
